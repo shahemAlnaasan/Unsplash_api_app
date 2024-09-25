@@ -1,51 +1,83 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:unsplash_api_app/presentation/widgets/collection_image_grid.dart';
+import 'package:unsplash_api_app/presentation/widgets/for_you_image_grid.dart';
+import 'package:unsplash_api_app/presentation/widgets/section_option.dart';
 
-class ImageScreen extends StatelessWidget {
+class ImageScreen extends StatefulWidget {
   const ImageScreen({super.key});
+
+  @override
+  State<ImageScreen> createState() => _ImageScreenState();
+}
+
+class _ImageScreenState extends State<ImageScreen> {
+  bool isForYouSelected = true;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      appBar: AppBar(
-        backgroundColor: Colors.black,
-        actions: [
-          Image.asset(
-            "assets/icons/menu.png",
-            color: Colors.white,
-            width: 24,
-            height: 24,
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            floating: true,
+            pinned: false,
+            snap: false,
+            expandedHeight: 30.0,
+            backgroundColor: Colors.black,
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SectionOption(
+                  title: 'Collections',
+                  color: isForYouSelected ? Colors.transparent : Colors.white,
+                  textColor: isForYouSelected ? Colors.white : Colors.black,
+                  onTap: () {
+                    setState(
+                      () {
+                        isForYouSelected = false;
+                      },
+                    );
+                  },
+                ),
+                SizedBox(width: 16.sp),
+                SectionOption(
+                  title: 'For You',
+                  color: isForYouSelected ? Colors.white : Colors.transparent,
+                  textColor: isForYouSelected ? Colors.black : Colors.white,
+                  onTap: () {
+                    setState(() {
+                      isForYouSelected = true;
+                    });
+                  },
+                ),
+              ],
+            ),
           ),
-          SizedBox(width: 16.sp),
-        ],
-      ),
-      body: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                width: 120.sp,
-                height: 30.sp,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20)),
-              ),
-              SizedBox(width: 16.sp),
-              Container(
-                width: 120.sp,
-                height: 30.sp,
-                decoration: BoxDecoration(
-                  color: Colors.transparent,
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: Colors.grey),
-                ),
-                child: Center(
-                  child: Text("For you", style: TextStyle(color: Colors.white)),
-                ),
-              ),
-            ],
+          SliverList(
+            delegate: SliverChildListDelegate(
+              [
+                isForYouSelected
+                    ? Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 30),
+                        child: ForYouImageGrid(),
+                      )
+                    : ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: 10,
+                        itemBuilder: (context, i) {
+                          return const Column(
+                            children: [
+                              CollectionImageGrid(),
+                              SizedBox(height: 23),
+                            ],
+                          );
+                        },
+                      ),
+              ],
+            ),
           ),
         ],
       ),
