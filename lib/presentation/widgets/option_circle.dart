@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 class OptionCircle extends StatelessWidget {
   final Widget? icon;
-  const OptionCircle({super.key, this.icon});
+  final Color? color;
+  const OptionCircle({super.key, this.icon, this.color});
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +11,7 @@ class OptionCircle extends StatelessWidget {
       width: 45,
       height: 45,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: color ?? Colors.black,
         borderRadius: BorderRadius.circular(100),
       ),
       child: Center(child: icon),

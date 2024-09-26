@@ -1,35 +1,52 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_blurhash/flutter_blurhash.dart';
+import 'package:unsplash_api_app/data/models/image_model.dart';
 import 'package:unsplash_api_app/presentation/widgets/image_options.dart';
+import 'package:unsplash_api_app/presentation/widgets/loading_indecator.dart';
 import 'package:unsplash_api_app/presentation/widgets/profile_list_tile.dart';
 
 class ImageDetailsScreen extends StatelessWidget {
-  const ImageDetailsScreen({super.key});
+  final ImageItems imageItems;
+  final int i;
+  const ImageDetailsScreen(
+      {super.key, required this.imageItems, required this.i});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      // extendBody: true,
       body: Stack(
         children: [
+          Positioned.fill(
+            child: BlurHash(
+              hash: imageItems.blurHash,
+              imageFit: BoxFit.cover,
+            ),
+          ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30),
+            padding: const EdgeInsets.only(right: 30, left: 30, bottom: 30),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const SizedBox(height: 40),
-                    const Row(
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Icon(
-                          Icons.arrow_back_ios_new_rounded,
-                          color: Colors.white,
-                          size: 20,
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Icon(
+                            Icons.arrow_back_ios_new_rounded,
+                            color: Colors.white,
+                            size: 20,
+                          ),
                         ),
-                        Text(
+                        const Text(
                           "Lukas Belsky",
                           style: TextStyle(
                             color: Colors.white,
@@ -37,20 +54,32 @@ class ImageDetailsScreen extends StatelessWidget {
                             fontSize: 20,
                           ),
                         ),
-                        Icon(
+                        const Icon(
                           Icons.ios_share_outlined,
                           color: Colors.white,
                           size: 25,
                         )
                       ],
                     ),
-                    const SizedBox(height: 15),
-                    IntrinsicHeight(
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(18),
-                        child: Image.asset(
-                          "assets/icons/photo_2024-09-24_21-16-55.jpg",
-                          fit: BoxFit.fitWidth,
+                    const SizedBox(height: 40),
+                    Container(
+                      height: 530,
+                      child: Hero(
+                        tag: i,
+                        child: Center(
+                          child: IntrinsicHeight(
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(18),
+                              child: CachedNetworkImage(
+                                imageUrl: imageItems.urls.regular,
+                                placeholder: (context, url) =>
+                                    const LoadingIndecator(),
+                                errorWidget: (context, url, error) =>
+                                    const Icon(Icons.error),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                     ),
@@ -58,7 +87,9 @@ class ImageDetailsScreen extends StatelessWidget {
                     const ImageOptions(),
                   ],
                 ),
-                const ProfileListTile(),
+                ProfileListTile(
+                  user: imageItems.user,
+                ),
               ],
             ),
           )

@@ -30,7 +30,7 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
               selectedLabelStyle:
                   const TextStyle(color: Colors.white, fontSize: 9),
               elevation: 0,
-              backgroundColor: const Color.fromARGB(100, 255, 252, 252),
+              backgroundColor: const Color.fromARGB(62, 255, 252, 252),
               onTap: (val) {
                 setState(() {
                   widget.onIndexChanged(val);

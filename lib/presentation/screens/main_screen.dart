@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:unsplash_api_app/logic/bloc/images_bloc/images_bloc.dart';
 import 'package:unsplash_api_app/presentation/screens/image_screen.dart';
 import 'package:unsplash_api_app/presentation/screens/profile_screen.dart';
 import 'package:unsplash_api_app/presentation/screens/search_screen.dart';
@@ -8,7 +10,10 @@ class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
 
   static List navigationBarScreens = [
-    const ImageScreen(),
+    BlocProvider(
+      create: (context) => ImagesBloc()..add(GetImagesEvent()),
+      child: const ImageScreen(),
+    ),
     const SearchScreen(),
     const ProfileScreen(),
   ];

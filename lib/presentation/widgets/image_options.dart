@@ -12,12 +12,14 @@ class ImageOptions extends StatelessWidget {
         OptionCircle(
           icon: Image.asset(
             "assets/icons/bookmark.png",
+            color: Colors.white,
             width: 25,
             height: 25,
           ),
         ),
         const SizedBox(width: 15),
         OptionCircle(
+          color: Colors.white,
           icon: Image.asset(
             "assets/icons/arrow-down.png",
             width: 25,
@@ -28,6 +30,7 @@ class ImageOptions extends StatelessWidget {
         OptionCircle(
           icon: Image.asset(
             "assets/icons/heart.png",
+            color: Colors.white,
             width: 25,
             height: 25,
           ),

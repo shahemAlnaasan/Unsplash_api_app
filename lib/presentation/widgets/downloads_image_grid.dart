@@ -22,11 +22,11 @@ class _DownloadsImageGridState extends State<DownloadsImageGrid> {
       itemBuilder: (context, i) {
         return GestureDetector(
           onTap: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => const ImageDetailsScreen(),
-              ),
-            );
+            // Navigator.of(context).push(
+            //   MaterialPageRoute(
+            //     // builder: (context) => const ImageDetailsScreen(imageItems: null,),
+            //   ),
+            // );
           },
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
