@@ -4,8 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:unsplash_api_app/data/models/image_model.dart';
-import 'package:unsplash_api_app/logic/bloc/bloc/download_image_bloc.dart';
+import 'package:unsplash_api_app/logic/bloc/download_image_bloc/download_image_bloc.dart';
 import 'package:unsplash_api_app/logic/bloc/images_bloc/images_bloc.dart';
+import 'package:unsplash_api_app/logic/bloc/share_image_bloc/share_image_bloc.dart';
 import 'package:unsplash_api_app/presentation/screens/image_details_screen.dart';
 
 class ForYouImageGrid extends StatelessWidget {
@@ -37,8 +38,15 @@ class ForYouImageGrid extends StatelessWidget {
           onTap: () {
             Navigator.of(context).push(
               MaterialPageRoute(
-                  builder: (context) => BlocProvider(
-                        create: (context) => DownloadImageBloc(),
+                  builder: (context) => MultiBlocProvider(
+                        providers: [
+                          BlocProvider(
+                            create: (context) => DownloadImageBloc(),
+                          ),
+                          BlocProvider(
+                            create: (context) => ShareImageBloc(),
+                          )
+                        ],
                         child: ImageDetailsScreen(
                           imageItems: images[i],
                           i: i,

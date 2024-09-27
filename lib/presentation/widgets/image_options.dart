@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:unsplash_api_app/data/models/image_model.dart';
-import 'package:unsplash_api_app/logic/bloc/bloc/download_image_bloc.dart';
+import 'package:unsplash_api_app/logic/bloc/download_image_bloc/download_image_bloc.dart';
 import 'package:unsplash_api_app/presentation/widgets/option_circle.dart';
 
 class ImageOptions extends StatelessWidget {
@@ -26,7 +26,7 @@ class ImageOptions extends StatelessWidget {
           onTap: () {
             context
                 .read<DownloadImageBloc>()
-                .add(DownloadEvent(imageUrl: imageItems.urls.regular));
+                .add(DownloadEvent(imageUrl: imageItems.urls.full));
           },
           color: Colors.white,
           icon: Image.asset(

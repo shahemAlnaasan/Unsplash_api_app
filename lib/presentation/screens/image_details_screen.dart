@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:unsplash_api_app/data/models/image_model.dart';
-import 'package:unsplash_api_app/logic/bloc/bloc/download_image_bloc.dart';
+import 'package:unsplash_api_app/logic/bloc/download_image_bloc/download_image_bloc.dart';
+import 'package:unsplash_api_app/logic/bloc/share_image_bloc/share_image_bloc.dart';
 import 'package:unsplash_api_app/presentation/widgets/details_screens_upper_bar.dart';
 import 'package:unsplash_api_app/presentation/widgets/image_options.dart';
 import 'package:unsplash_api_app/presentation/widgets/loading_indecator.dart';
@@ -19,18 +20,35 @@ class ImageDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.black,
-        body: BlocListener<DownloadImageBloc, DownloadImageState>(
-          listener: (context, state) {
-            if (state is ImageDownloadSuccess) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(state.message)),
-              );
-            } else if (state is ImageDownloadFailed) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(state.errorMessage)),
-              );
-            }
-          },
+        body: MultiBlocListener(
+          listeners: [
+            BlocListener<DownloadImageBloc, DownloadImageState>(
+              listener: (context, state) {
+                if (state is ImageDownloadSuccess) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text(state.message)),
+                  );
+                } else if (state is ImageDownloadFailed) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text(state.errorMessage)),
+                  );
+                }
+              },
+            ),
+            BlocListener<ShareImageBloc, ShareImageState>(
+              listener: (context, state) {
+                if (state is ShareImageSuccessState) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text(state.message)),
+                  );
+                } else if (state is ShareImageFailedState) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text(state.errorMessage)),
+                  );
+                }
+              },
+            ),
+          ],
           child: Stack(
             children: [
               Positioned.fill(

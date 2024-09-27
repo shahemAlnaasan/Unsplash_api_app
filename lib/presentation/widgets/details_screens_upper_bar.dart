@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:unsplash_api_app/data/models/image_model.dart';
+import 'package:unsplash_api_app/logic/bloc/share_image_bloc/share_image_bloc.dart';
 
 class DetailsScreensUpperBar extends StatefulWidget {
   final ImageItems imageItems;
@@ -35,10 +37,16 @@ class _DetailsScreensUpperBarState extends State<DetailsScreensUpperBar> {
             fontSize: 20,
           ),
         ),
-        const Icon(
-          Icons.ios_share_outlined,
-          color: Colors.white,
-          size: 25,
+        GestureDetector(
+          onTap: () {
+            context.read<ShareImageBloc>().add(
+                StartShareImageEvent(imageUrl: widget.imageItems.urls.small));
+          },
+          child: const Icon(
+            Icons.ios_share_outlined,
+            color: Colors.white,
+            size: 25,
+          ),
         )
       ],
     );

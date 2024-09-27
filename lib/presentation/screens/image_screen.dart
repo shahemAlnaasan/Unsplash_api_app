@@ -91,9 +91,12 @@ class _ImageScreenState extends State<ImageScreen> {
                         builder: (context, state) {
                           if (state.status == ImagesStatus.loading) {
                             return const SizedBox(
-                                width: 400,
-                                height: 700,
-                                child: Center(child: LoadingIndecator()));
+                              width: 400,
+                              height: 700,
+                              child: Center(
+                                child: LoadingIndecator(),
+                              ),
+                            );
                           } else if (state.status == ImagesStatus.success) {
                             List<ImageItems> images = state.images;
                             return Padding(
