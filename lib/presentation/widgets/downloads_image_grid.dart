@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:unsplash_api_app/presentation/screens/image_details_screen.dart';
 
 class DownloadsImageGrid extends StatefulWidget {
   const DownloadsImageGrid({super.key});

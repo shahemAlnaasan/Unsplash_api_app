@@ -90,16 +90,17 @@ class _ImageScreenState extends State<ImageScreen> {
                     ? BlocBuilder<ImagesBloc, ImagesState>(
                         builder: (context, state) {
                           if (state.status == ImagesStatus.loading) {
-                            return SizedBox(
-                                width: MediaQuery.sizeOf(context).width,
-                                height: MediaQuery.sizeOf(context).height,
-                                child: const Center(child: LoadingIndecator()));
+                            return const SizedBox(
+                                width: 400,
+                                height: 700,
+                                child: Center(child: LoadingIndecator()));
                           } else if (state.status == ImagesStatus.success) {
                             List<ImageItems> images = state.images;
                             return Padding(
                               padding: const EdgeInsets.only(
                                   left: 25, right: 25, bottom: 50),
                               child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   ForYouImageGrid(
                                     images: images,

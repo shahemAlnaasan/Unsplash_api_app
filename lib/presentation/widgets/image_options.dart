@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:unsplash_api_app/data/models/image_model.dart';
+import 'package:unsplash_api_app/logic/bloc/bloc/download_image_bloc.dart';
 import 'package:unsplash_api_app/presentation/widgets/option_circle.dart';
 
 class ImageOptions extends StatelessWidget {
-  const ImageOptions({super.key});
+  final ImageItems imageItems;
+  const ImageOptions({super.key, required this.imageItems});
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +23,11 @@ class ImageOptions extends StatelessWidget {
         ),
         const SizedBox(width: 15),
         OptionCircle(
+          onTap: () {
+            context
+                .read<DownloadImageBloc>()
+                .add(DownloadEvent(imageUrl: imageItems.urls.regular));
+          },
           color: Colors.white,
           icon: Image.asset(
             "assets/icons/arrow-down.png",

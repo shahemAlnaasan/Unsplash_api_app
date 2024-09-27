@@ -9,7 +9,13 @@ import 'package:unsplash_api_app/presentation/widgets/bottom_navigation_bar_widg
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
 
-  static List navigationBarScreens = [
+  @override
+  State<MainScreen> createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<MainScreen> {
+  int _currentIndex = 0;
+  static List<Widget> navigationBarScreens = [
     BlocProvider(
       create: (context) => ImagesBloc()..add(GetImagesEvent()),
       child: const ImageScreen(),
@@ -17,13 +23,6 @@ class MainScreen extends StatefulWidget {
     const SearchScreen(),
     const ProfileScreen(),
   ];
-
-  @override
-  State<MainScreen> createState() => _MainScreenState();
-}
-
-class _MainScreenState extends State<MainScreen> {
-  int _currentIndex = 0;
 
   void onIndexChanged(int newIndex) {
     setState(() {
@@ -34,12 +33,14 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBody: true,
-      bottomNavigationBar: BottomNavigationBarWidget(
-        currentIndex: _currentIndex,
-        onIndexChanged: onIndexChanged,
-      ),
-      body: MainScreen.navigationBarScreens.elementAt(_currentIndex),
-    );
+        extendBody: true,
+        bottomNavigationBar: BottomNavigationBarWidget(
+          currentIndex: _currentIndex,
+          onIndexChanged: onIndexChanged,
+        ),
+        body: IndexedStack(
+          index: _currentIndex,
+          children: navigationBarScreens,
+        ));
   }
 }

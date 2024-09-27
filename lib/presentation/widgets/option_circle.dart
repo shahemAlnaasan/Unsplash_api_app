@@ -3,18 +3,22 @@ import 'package:flutter/material.dart';
 class OptionCircle extends StatelessWidget {
   final Widget? icon;
   final Color? color;
-  const OptionCircle({super.key, this.icon, this.color});
+  final void Function()? onTap;
+  const OptionCircle({super.key, this.icon, this.color, this.onTap});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 45,
-      height: 45,
-      decoration: BoxDecoration(
-        color: color ?? Colors.black,
-        borderRadius: BorderRadius.circular(100),
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: 45,
+        height: 45,
+        decoration: BoxDecoration(
+          color: color ?? Colors.black,
+          borderRadius: BorderRadius.circular(100),
+        ),
+        child: Center(child: icon),
       ),
-      child: Center(child: icon),
     );
   }
 }

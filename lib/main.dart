@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:unsplash_api_app/observer/bloc_observer.dart';
-import 'package:unsplash_api_app/presentation/screens/main_screen.dart';
+import 'package:unsplash_api_app/main_screen.dart';
 
 void main() {
   Bloc.observer = MyBlocObserver();
