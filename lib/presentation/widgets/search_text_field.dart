@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:unsplash_api_app/logic/bloc/search_image_bloc/search_image_bloc.dart';
 
 class SearchTextField extends StatefulWidget {
-  const SearchTextField({super.key});
+  final TextEditingController? controller;
+  const SearchTextField({super.key, this.controller});
 
   @override
   State<SearchTextField> createState() => _SearchTextFieldState();
@@ -38,6 +41,12 @@ class _SearchTextFieldState extends State<SearchTextField> {
       child: SizedBox(
         height: 40,
         child: TextFormField(
+          controller: widget.controller,
+          onFieldSubmitted: (searchText) {
+            context
+                .read<SearchImageBloc>()
+                .add(StartSearchImageEvent(query: searchText));
+          },
           focusNode: _focusNode,
           style: const TextStyle(
             color: Colors.black,

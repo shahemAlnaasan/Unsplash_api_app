@@ -5,15 +5,15 @@ import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:unsplash_api_app/data/models/image_model.dart';
 import 'package:unsplash_api_app/logic/bloc/download_image_bloc/download_image_bloc.dart';
-import 'package:unsplash_api_app/logic/bloc/images_bloc/images_bloc.dart';
+import 'package:unsplash_api_app/logic/bloc/search_image_bloc/search_image_bloc.dart';
 import 'package:unsplash_api_app/logic/bloc/share_image_bloc/share_image_bloc.dart';
 import 'package:unsplash_api_app/presentation/screens/image_details_screen.dart';
 
-class ForYouImageGrid extends StatelessWidget {
+class SearchedImageGrid extends StatelessWidget {
   final List<ImageItems> images;
   final ScrollController? controller;
-  final ImagesState state;
-  const ForYouImageGrid(
+  final SearchImageState state;
+  const SearchedImageGrid(
       {super.key, required this.images, this.controller, required this.state});
 
   Future<void> preLoadeDetailsImage(BuildContext context, String url) async {
@@ -50,13 +50,13 @@ class ForYouImageGrid extends StatelessWidget {
                         child: ImageDetailsScreen(
                           imageItems: images[i],
                           i: i,
-                          isFromSearchScreen: false,
+                          isFromSearchScreen: true,
                         ),
                       )),
             );
           },
           child: Hero(
-            tag: "for_you_$i",
+            tag: "search_$i",
             child: ClipRRect(
               borderRadius: BorderRadius.circular(10),
               child: CachedNetworkImage(

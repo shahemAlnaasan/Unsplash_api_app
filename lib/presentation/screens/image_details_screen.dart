@@ -13,8 +13,12 @@ import 'package:unsplash_api_app/presentation/widgets/profile_list_tile.dart';
 class ImageDetailsScreen extends StatelessWidget {
   final ImageItems imageItems;
   final int i;
+  final bool isFromSearchScreen;
   const ImageDetailsScreen(
-      {super.key, required this.imageItems, required this.i});
+      {super.key,
+      required this.imageItems,
+      required this.i,
+      required this.isFromSearchScreen});
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +77,8 @@ class ImageDetailsScreen extends StatelessWidget {
                         SizedBox(
                           height: 530,
                           child: Hero(
-                            tag: i,
+                            tag:
+                                isFromSearchScreen ? "search_$i" : "for_you_$i",
                             child: Center(
                               child: IntrinsicHeight(
                                 child: ClipRRect(

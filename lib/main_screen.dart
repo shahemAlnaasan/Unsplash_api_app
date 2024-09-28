@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:unsplash_api_app/logic/bloc/search_image_bloc/search_image_bloc.dart';
 import 'package:unsplash_api_app/logic/bloc/images_bloc/images_bloc.dart';
 import 'package:unsplash_api_app/presentation/screens/image_screen.dart';
 import 'package:unsplash_api_app/presentation/screens/profile_screen.dart';
@@ -20,7 +21,10 @@ class _MainScreenState extends State<MainScreen> {
       create: (context) => ImagesBloc()..add(GetImagesEvent()),
       child: const ImageScreen(),
     ),
-    const SearchScreen(),
+    BlocProvider(
+      create: (context) => SearchImageBloc(),
+      child: const SearchScreen(),
+    ),
     const ProfileScreen(),
   ];
 
