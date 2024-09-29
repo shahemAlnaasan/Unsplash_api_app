@@ -13,12 +13,22 @@ import 'package:unsplash_api_app/presentation/widgets/profile_list_tile.dart';
 class ImageDetailsScreen extends StatelessWidget {
   final ImageItems imageItems;
   final int i;
-  final bool isFromSearchScreen;
+  final String sourcePage;
   const ImageDetailsScreen(
       {super.key,
       required this.imageItems,
       required this.i,
-      required this.isFromSearchScreen});
+      required this.sourcePage});
+
+  String getHeroTag(String sourcePage) {
+    if (sourcePage == "home") {
+      return "home_$i";
+    } else if (sourcePage == "search") {
+      return "search_$i";
+    } else {
+      return "favorites_$i";
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,17 +50,7 @@ class ImageDetailsScreen extends StatelessWidget {
               },
             ),
             BlocListener<ShareImageBloc, ShareImageState>(
-              listener: (context, state) {
-                if (state is ShareImageSuccessState) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text(state.message)),
-                  );
-                } else if (state is ShareImageFailedState) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text(state.errorMessage)),
-                  );
-                }
-              },
+              listener: (context, state) {},
             ),
           ],
           child: Stack(
@@ -77,8 +77,7 @@ class ImageDetailsScreen extends StatelessWidget {
                         SizedBox(
                           height: 530,
                           child: Hero(
-                            tag:
-                                isFromSearchScreen ? "search_$i" : "for_you_$i",
+                            tag: getHeroTag(sourcePage),
                             child: Center(
                               child: IntrinsicHeight(
                                 child: ClipRRect(

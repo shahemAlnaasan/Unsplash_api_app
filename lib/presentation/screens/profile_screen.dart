@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:unsplash_api_app/presentation/widgets/downloads_image_grid.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:unsplash_api_app/logic/bloc/favorite_bloc/favorite_bloc.dart';
+import 'package:unsplash_api_app/presentation/widgets/favorites_image_grid.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -12,29 +14,45 @@ class ProfileScreen extends StatelessWidget {
         centerTitle: true,
         backgroundColor: Colors.black,
         title: const Text(
-          "Your Downloads",
+          "Your Favorites",
           style: TextStyle(
             color: Colors.white,
             fontFamily: "Body",
             fontSize: 20,
           ),
         ),
-        leading: const Padding(
-          padding: EdgeInsets.only(left: 25),
-          child: Icon(
-            Icons.arrow_back_ios_new_rounded,
-            color: Colors.white,
-            size: 22,
-          ),
-        ),
+        // leading: const Padding(
+        //   padding: EdgeInsets.only(left: 25),
+        //   child: Icon(
+        //     Icons.arrow_back_ios_new_rounded,
+        //     color: Colors.white,
+        //     size: 22,
+        //   ),
+        // ),
       ),
-      body: const Padding(
-        padding: EdgeInsets.symmetric(horizontal: 30),
-        child: Column(
-          children: [
-            SizedBox(height: 20),
-            DownloadsImageGrid(),
-          ],
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 30),
+        child: BlocBuilder<FavoriteBloc, FavoriteState>(
+          builder: (context, state) {
+            return state.favoriteImages.isEmpty
+                ? const Center(
+                    child: Text(
+                      "No favorites to show",
+                      style: TextStyle(
+                          fontSize: 20, color: Colors.grey, fontFamily: "Body"),
+                    ),
+                  )
+                : SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        const SizedBox(height: 20),
+                        FavoritesImageGrid(
+                          favoriteImagesList: state.favoriteImages,
+                        ),
+                      ],
+                    ),
+                  );
+          },
         ),
       ),
     );

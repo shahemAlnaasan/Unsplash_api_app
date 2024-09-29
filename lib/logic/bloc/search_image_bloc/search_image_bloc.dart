@@ -2,7 +2,6 @@ import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:unsplash_api_app/data/models/image_model.dart';
-import 'package:unsplash_api_app/data/models/search_image_model.dart';
 import 'package:unsplash_api_app/data/repository/search_image_repo.dart';
 
 part 'search_image_event.dart';

@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:unsplash_api_app/constant/strings.dart';
 import 'package:unsplash_api_app/data/models/image_model.dart';
-import 'package:unsplash_api_app/data/models/search_image_model.dart';
 import 'package:unsplash_api_app/logic/bloc/search_image_bloc/search_image_bloc.dart';
 import 'package:unsplash_api_app/presentation/widgets/loading_indecator.dart';
 import 'package:unsplash_api_app/presentation/widgets/search_text_field.dart';

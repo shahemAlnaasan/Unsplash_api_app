@@ -50,7 +50,7 @@ class SearchedImageGrid extends StatelessWidget {
                         child: ImageDetailsScreen(
                           imageItems: images[i],
                           i: i,
-                          isFromSearchScreen: true,
+                          sourcePage: 'search',
                         ),
                       )),
             );

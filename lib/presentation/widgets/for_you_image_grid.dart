@@ -50,13 +50,13 @@ class ForYouImageGrid extends StatelessWidget {
                         child: ImageDetailsScreen(
                           imageItems: images[i],
                           i: i,
-                          isFromSearchScreen: false,
+                          sourcePage: 'home',
                         ),
                       )),
             );
           },
           child: Hero(
-            tag: "for_you_$i",
+            tag: "home_$i",
             child: ClipRRect(
               borderRadius: BorderRadius.circular(10),
               child: CachedNetworkImage(

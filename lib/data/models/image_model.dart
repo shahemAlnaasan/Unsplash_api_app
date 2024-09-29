@@ -1,11 +1,29 @@
+import 'package:hive/hive.dart';
+
+part 'image_model.g.dart';
+
+@HiveType(typeId: 0)
 class ImageItems {
-  late String id;
-  late int width;
-  late int height;
-  late String blurHash;
-  late Urls urls;
-  late Links links;
-  late User user;
+  @HiveField(0)
+  final String id;
+
+  @HiveField(1)
+  final int width;
+
+  @HiveField(2)
+  final int height;
+
+  @HiveField(3)
+  final String blurHash;
+
+  @HiveField(4)
+  final Urls urls;
+
+  @HiveField(5)
+  final Links links;
+
+  @HiveField(6)
+  final User user;
 
   ImageItems({
     required this.id,
@@ -17,24 +35,38 @@ class ImageItems {
     required this.user,
   });
 
-  ImageItems.fromJson(Map<String, dynamic> json) {
-    id = json["id"];
-    width = json["width"];
-    height = json["height"];
-    blurHash = json["blur_hash"];
-    urls = Urls.fromJson(json["urls"]);
-    links = Links.fromJson(json["links"]);
-    user = User.fromJson(json["user"]);
+  factory ImageItems.fromJson(Map<String, dynamic> json) {
+    return ImageItems(
+      id: json["id"],
+      width: json["width"],
+      height: json["height"],
+      blurHash: json["blur_hash"],
+      urls: Urls.fromJson(json["urls"]),
+      links: Links.fromJson(json["links"]),
+      user: User.fromJson(json["user"]),
+    );
   }
 }
 
+@HiveType(typeId: 1)
 class Urls {
-  late String raw;
-  late String full;
-  late String regular;
-  late String small;
-  late String thumb;
-  late String smallS3;
+  @HiveField(0)
+  final String raw;
+
+  @HiveField(1)
+  final String full;
+
+  @HiveField(2)
+  final String regular;
+
+  @HiveField(3)
+  final String small;
+
+  @HiveField(4)
+  final String thumb;
+
+  @HiveField(5)
+  final String smallS3;
 
   Urls({
     required this.raw,
@@ -45,36 +77,52 @@ class Urls {
     required this.smallS3,
   });
 
-  Urls.fromJson(Map<String, dynamic> json) {
-    raw = json["raw"];
-    full = json["full"];
-    regular = json["regular"];
-    small = json["small"];
-    thumb = json["thumb"];
-    smallS3 = json["small_s3"];
+  factory Urls.fromJson(Map<String, dynamic> json) {
+    return Urls(
+      raw: json["raw"],
+      full: json["full"],
+      regular: json["regular"],
+      small: json["small"],
+      thumb: json["thumb"],
+      smallS3: json["small_s3"],
+    );
   }
 }
 
+@HiveType(typeId: 2)
 class Links {
-  late String download;
-  late String downloadLocation;
+  @HiveField(0)
+  final String download;
+
+  @HiveField(1)
+  final String downloadLocation;
 
   Links({
     required this.download,
     required this.downloadLocation,
   });
 
-  Links.fromJson(Map<String, dynamic> json) {
-    download = json["download"];
-    downloadLocation = json["download_location"];
+  factory Links.fromJson(Map<String, dynamic> json) {
+    return Links(
+      download: json["download"],
+      downloadLocation: json["download_location"],
+    );
   }
 }
 
+@HiveType(typeId: 3)
 class User {
-  late String id;
-  late String name;
-  late String? bio;
-  late ProfileImage profileImage;
+  @HiveField(0)
+  final String id;
+
+  @HiveField(1)
+  final String name;
+
+  @HiveField(2)
+  final String? bio;
+
+  @HiveField(3)
+  final ProfileImage profileImage;
 
   User({
     required this.id,
@@ -83,18 +131,26 @@ class User {
     required this.profileImage,
   });
 
-  User.fromJson(Map<String, dynamic> json) {
-    id = json["id"];
-    name = json["name"];
-    bio = json["bio"];
-    profileImage = ProfileImage.fromJson(json["profile_image"]);
+  factory User.fromJson(Map<String, dynamic> json) {
+    return User(
+      id: json["id"],
+      name: json["name"],
+      bio: json["bio"],
+      profileImage: ProfileImage.fromJson(json["profile_image"]),
+    );
   }
 }
 
+@HiveType(typeId: 4)
 class ProfileImage {
-  late String small;
-  late String medium;
-  late String large;
+  @HiveField(0)
+  final String small;
+
+  @HiveField(1)
+  final String medium;
+
+  @HiveField(2)
+  final String large;
 
   ProfileImage({
     required this.small,
@@ -102,9 +158,11 @@ class ProfileImage {
     required this.large,
   });
 
-  ProfileImage.fromJson(Map<String, dynamic> json) {
-    small = json["small"];
-    medium = json["medium"];
-    large = json["large"];
+  factory ProfileImage.fromJson(Map<String, dynamic> json) {
+    return ProfileImage(
+      small: json["small"],
+      medium: json["medium"],
+      large: json["large"],
+    );
   }
 }
