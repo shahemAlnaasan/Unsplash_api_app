@@ -32,21 +32,22 @@ class _FavoritesImageGridState extends State<FavoritesImageGrid> {
           onTap: () {
             Navigator.of(context).push(
               MaterialPageRoute(
-                  builder: (context) => MultiBlocProvider(
-                        providers: [
-                          BlocProvider(
-                            create: (context) => DownloadImageBloc(),
-                          ),
-                          BlocProvider(
-                            create: (context) => ShareImageBloc(),
-                          )
-                        ],
-                        child: ImageDetailsScreen(
-                          imageItems: widget.favoriteImagesList[i],
-                          i: i,
-                          sourcePage: 'favorites',
-                        ),
-                      )),
+                builder: (context) => MultiBlocProvider(
+                  providers: [
+                    BlocProvider(
+                      create: (context) => DownloadImageBloc(),
+                    ),
+                    BlocProvider(
+                      create: (context) => ShareImageBloc(),
+                    )
+                  ],
+                  child: ImageDetailsScreen(
+                    imageItems: widget.favoriteImagesList[i],
+                    i: i,
+                    sourcePage: 'favorites',
+                  ),
+                ),
+              ),
             );
           },
           child: Column(

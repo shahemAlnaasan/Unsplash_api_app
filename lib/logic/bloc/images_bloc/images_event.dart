@@ -8,3 +8,5 @@ sealed class ImagesEvent extends Equatable {
 }
 
 class GetImagesEvent extends ImagesEvent {}
+
+class RefreshImagesEvent extends ImagesEvent {}

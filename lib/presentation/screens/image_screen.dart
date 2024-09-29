@@ -121,7 +121,7 @@ class _ImageScreenState extends State<ImageScreen> {
                     : ListView.builder(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
-                        itemCount: 10,
+                        itemCount: 1,
                         itemBuilder: (context, i) {
                           return const Column(
                             children: [

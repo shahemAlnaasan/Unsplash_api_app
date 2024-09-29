@@ -135,9 +135,9 @@ class _SearchScreenState extends State<SearchScreen> {
                   return Center(
                     heightFactor: 0.025.sh,
                     child: const Text(
-                      "Search for any image",
+                      "what's on your mind",
                       style: TextStyle(
-                        color: Colors.white,
+                        color: Colors.grey,
                         fontSize: 20,
                         fontFamily: "Body",
                       ),

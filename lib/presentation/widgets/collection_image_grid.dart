@@ -41,7 +41,7 @@ class CollectionImageGrid extends StatelessWidget {
                         topRight: Radius.circular(10),
                       ),
                       child: Image.asset(
-                        'assets/icons/Annotation 2024-09-23 144704.png',
+                        'assets/icons/photo_2024-09-24_21-16-55.jpg',
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -56,7 +56,7 @@ class CollectionImageGrid extends StatelessWidget {
                         topRight: Radius.circular(10),
                       ),
                       child: Image.asset(
-                        'assets/icons/Annotation 2024-09-23 144704.png',
+                        'assets/icons/photo_2024-09-24_21-16-55.jpg',
                         fit: BoxFit.cover,
                       ),
                     ),
