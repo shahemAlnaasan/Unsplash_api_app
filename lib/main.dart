@@ -5,6 +5,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:unsplash_api_app/data/models/image_model.dart';
 import 'package:unsplash_api_app/logic/bloc/favorite_bloc/favorite_bloc.dart';
+import 'package:unsplash_api_app/logic/bloc/internet_bloc/internet_bloc.dart';
 import 'package:unsplash_api_app/observer/bloc_observer.dart';
 import 'package:unsplash_api_app/main_screen.dart';
 
@@ -34,8 +35,15 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (_, child) {
-        return BlocProvider(
-          create: (context) => FavoriteBloc()..add(LoadFavoritesEvent()),
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) => FavoriteBloc()..add(LoadFavoritesEvent()),
+            ),
+            BlocProvider(
+              create: (context) => InternetBloc(),
+            )
+          ],
           child: const MaterialApp(
             debugShowCheckedModeBanner: false,
             home: MainScreen(),
