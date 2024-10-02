@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:unsplash_api_app/data/models/image_model.dart';
+import 'package:unsplash_api_app/logic/bloc/collection_bloc/collection_bloc.dart';
 import 'package:unsplash_api_app/logic/bloc/images_bloc/images_bloc.dart';
+import 'package:unsplash_api_app/presentation/screens/collection_details_screen.dart';
 import 'package:unsplash_api_app/presentation/widgets/collection_image_grid.dart';
 import 'package:unsplash_api_app/presentation/widgets/for_you_image_grid.dart';
 import 'package:unsplash_api_app/presentation/widgets/loading_indecator.dart';
@@ -118,19 +120,52 @@ class _ImageScreenState extends State<ImageScreen> {
                           }
                         },
                       )
-                    : ListView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: 1,
-                        itemBuilder: (context, i) {
-                          return const Column(
-                            children: [
-                              CollectionImageGrid(),
-                              SizedBox(height: 23),
-                            ],
-                          );
+                    : BlocBuilder<CollectionBloc, CollectionState>(
+                        builder: (context, state) {
+                          return state.collections.isEmpty
+                              ? SizedBox(
+                                  width: MediaQuery.sizeOf(context).width,
+                                  height: MediaQuery.sizeOf(context).height,
+                                  child: const Center(
+                                    child: Text(
+                                      "No favorites to show",
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          color: Colors.grey,
+                                          fontFamily: "Body"),
+                                    ),
+                                  ),
+                                )
+                              : ListView.builder(
+                                  shrinkWrap: true,
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  itemCount: state.collections.length,
+                                  itemBuilder: (context, i) {
+                                    return Column(
+                                      children: [
+                                        GestureDetector(
+                                          onTap: () {
+                                            Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    CollectionDetailsScreen(
+                                                  collection:
+                                                      state.collections[i],
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                          child: CollectionImageGrid(
+                                            collection: state.collections[i],
+                                          ),
+                                        ),
+                                        const SizedBox(height: 23),
+                                      ],
+                                    );
+                                  },
+                                );
                         },
-                      ),
+                      )
               ],
             ),
           ),

@@ -21,14 +21,6 @@ class ProfileScreen extends StatelessWidget {
             fontSize: 20,
           ),
         ),
-        // leading: const Padding(
-        //   padding: EdgeInsets.only(left: 25),
-        //   child: Icon(
-        //     Icons.arrow_back_ios_new_rounded,
-        //     color: Colors.white,
-        //     size: 22,
-        //   ),
-        // ),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 30),

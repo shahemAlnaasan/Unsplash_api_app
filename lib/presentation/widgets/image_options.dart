@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:unsplash_api_app/data/models/image_model.dart';
 import 'package:unsplash_api_app/logic/bloc/download_image_bloc/download_image_bloc.dart';
 import 'package:unsplash_api_app/logic/bloc/favorite_bloc/favorite_bloc.dart';
+import 'package:unsplash_api_app/presentation/widgets/custom_bottom_sheet.dart';
 import 'package:unsplash_api_app/presentation/widgets/option_circle.dart';
 
 class ImageOptions extends StatelessWidget {
@@ -15,6 +16,17 @@ class ImageOptions extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         OptionCircle(
+          onTap: () {
+            showModalBottomSheet(
+                barrierColor: Colors.transparent,
+                isScrollControlled: true,
+                context: context,
+                builder: (context) {
+                  return CustomBottomSheet(
+                    imageItems: imageItems,
+                  );
+                });
+          },
           icon: Image.asset(
             "assets/icons/bookmark.png",
             color: Colors.white,

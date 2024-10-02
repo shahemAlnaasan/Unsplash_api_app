@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_offline/flutter_offline.dart';
 import 'package:unsplash_api_app/data/web_services/check_internet_web_services.dart';
 import 'package:unsplash_api_app/logic/bloc/internet_bloc/internet_bloc.dart';
 import 'package:unsplash_api_app/logic/bloc/search_image_bloc/search_image_bloc.dart';
